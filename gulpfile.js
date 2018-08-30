@@ -8,16 +8,16 @@ var gulp = require('gulp'),
     autoprefixer = require('gulp-autoprefixer');
 
 gulp.task('styles', function () {
-    return gulp.src(['files/' + syntax + '/**/*.' + syntax + ''])
+    return gulp.src(['**/*.' + syntax + ''])
         .pipe(sass({outputStyle: 'expand'}).on("error", notify.onError()))
         .pipe(rename({suffix: '.min', prefix: ''}))
         .pipe(autoprefixer(['last 15 versions']))
         .pipe(cleancss({level: {1: {specialComments: 0}}})) // Opt., comment out when debugging
-        .pipe(gulp.dest('files/css'))
+        .pipe(gulp.dest('.'))
 });
 
 gulp.task('watch', function () {
-    gulp.watch(['files/' + syntax + '/**/*.' + syntax + ''], gulp.series('styles'));
+    gulp.watch(['**/*.' + syntax + ''], gulp.series('styles'));
 });
 
 gulp.task('default', gulp.parallel('watch'));
